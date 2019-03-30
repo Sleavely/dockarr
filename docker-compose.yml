@@ -1,0 +1,75 @@
+version: "3.7"
+services:
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - type: bind
+        read_only: true
+        source: ./letsencrypt/certs
+        target: /opt/letsencrypt/certs
+      - ./nginx:/etc/nginx
+    restart: unless-stopped
+
+  letsencrypt:
+    image: csmith/letsencrypt-lexicon:latest
+    container_name: letsencrypt
+    env_file: .env
+    volumes:
+      - ./letsencrypt:/letsencrypt
+    restart: unless-stopped
+
+  dyndns:
+    build: https://github.com/Sleavely/cloudflare-dyn-ip-updater.git
+    container_name: dyndns
+    env_file: .env
+    restart: unless-stopped
+
+  sonarr:
+    image: linuxserver/sonarr
+    container_name: sonarr
+    env_file: .env
+    volumes:
+      - ./sonarr:/config
+      - downloads:/downloads
+      #TODO: CHANGE ME DURING SETUP
+      - /d/TV Shows:/TV Shows
+      - /f/Shows:/Shows
+    ports:
+      - 8989:8989
+    restart: unless-stopped
+
+  radarr:
+    image: linuxserver/radarr
+    container_name: radarr
+    env_file: .env
+    volumes:
+      - ./radarr:/config
+      - downloads:/downloads
+      #TODO: CHANGE ME DURING SETUP
+      - /f/Movies:/Movies
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+
+  qbittorrent:
+    image: linuxserver/qbittorrent
+    container_name: qbittorrent
+    env_file: .env
+    environment:
+      WEBUI_PORT: 8087
+    volumes:
+      - ./qbittorrent:/config
+      - downloads:/downloads
+    ports:
+      - 6881:6881
+      - 6881:6881/udp
+      - 8087:8087
+    restart: unless-stopped
+
+volumes:
+  downloads:

@@ -4,7 +4,7 @@ A self-contained Docker service for running [Plex](https://www.plex.tv), [Radarr
 
 ## Getting started
 
-1. Configure the `.env` files
+1. Configure the `.env` file
 1. Run `setup.sh` to create some boilerplate directories
 1. Run `docker-compose up` (with `--detach` to run in the background)
 

@@ -1,4 +1,4 @@
-# dockarr
+# dockarr ⚓🏴‍☠️
 
 A self-contained Docker service for running [Plex](https://www.plex.tv), [Radarr](https://github.com/Radarr/Radarr), [Sonarr](https://github.com/Sonarr/Sonarr), and qbittorrent behind a [Letsencrypt](https://letsencrypt.org)-powered Nginx on a dynamic IP with [automatically updated](https://github.com/Sleavely/cloudflare-dyn-ip-updater) DNS from Cloudflare.
 

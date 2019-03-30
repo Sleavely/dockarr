@@ -4,6 +4,7 @@ qbittorrent/
 radarr/
 sonarr/
 nginx/htpasswd
+nginx/sites-enabled
 
 # dotenv environment variables file
 .env

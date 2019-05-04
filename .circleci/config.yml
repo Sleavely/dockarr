@@ -6,6 +6,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Use example .env
+          command: cp .example.env .env
+      - run:
           name: Try booting the stack
           command: docker-compose up --detach
 workflows:

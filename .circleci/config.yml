@@ -1,0 +1,15 @@
+version: 2
+jobs:
+  test_compose:
+    docker:
+      - image: circleci/buildpack-deps
+    steps:
+      - checkout
+      - run:
+          name: Try booting the stack
+          command: docker-compose up --detach
+workflows:
+  version: 2
+  make_cake:
+    jobs:
+      - test_compose

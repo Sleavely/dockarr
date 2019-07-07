@@ -37,7 +37,6 @@ services:
       - ./sonarr:/config
       - downloads:/downloads
       #TODO: CHANGE ME DURING SETUP
-      - /d/TV Shows:/TV Shows
       - /f/Shows:/Shows
     ports:
       - 8989:8989
